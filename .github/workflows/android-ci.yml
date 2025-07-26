@@ -29,11 +29,20 @@ jobs:
     - name: Run tests
       run: ./gradlew test
 
-    - name: Assemble Release APK
-      run: ./gradlew assembleRelease
+    - name: Assemble Library Release
+      run: ./gradlew :folioreader:assembleRelease
 
-    - name: Upload APK Artifact
+    - name: Assemble Sample Release APK
+      run: ./gradlew :sample:assembleRelease
+
+    - name: Upload Library AAR
       uses: actions/upload-artifact@v4
       with:
-        name: FolioReader-Android-APK
-        path: folioreader/build/outputs/apk/release/*.apk
+        name: FolioReader-Android-AAR
+        path: folioreader/build/outputs/aar/*.aar
+
+    - name: Upload Sample APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: FolioReader-Sample-APK
+        path: sample/build/outputs/apk/release/*.apk
